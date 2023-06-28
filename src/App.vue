@@ -1,40 +1,31 @@
 <script >
-import axios from 'axios';
+
+import index from './components/index.vue';
+
+import {store} from './store';
 
 // backtick : `
 
 export default {
+  name: 'App',
   data() {
-    return {
-      projects: [],
-      apiBase: 'http://127.0.0.1:8000/api/projects?page=4'
+    return{
+      store
     }
   },
-  mounted() {
-    this.getProjects()
-
-  },
-  methods: {
-    getProjects(){
-      axios.get(`${this.apiBase}`).then(res=> {
-        this.projects = res.data.projects.data
-      })
-    }
+  components: {
+    index
   }
 }
 
 </script>
 
 <template>
-  <h1>Ciao mondo</h1>
+  <main>
+    <h1>I miei progetti</h1>
+    <index/>
+  </main>
 
-  <div v-for="(element,index) in projects">
-    <h3>
-      {{ element.name }} => {{ element.type.name }} =><span v-for="(tag,index) in element.tags" >{{ tag.name }}</span>
-    </h3>
-    <img :src="'http://127.0.0.1:8000/storage/' + element.image" alt="">
-
-  </div>
 </template>
 
 <style lang="scss">
