@@ -35,16 +35,20 @@
     <div class="container">
         <div class="row">
             <div v-for="(element,index) in store.storedProjects" class="col-4 p-3">
-                <div class="card p-3 text-center">
+                <div class="card p-3 text-center" style="min-height:650px">
                     <div class="text-end">
-                        <span class="badge badge-type">
+                        <span class="badge badge-type shadow">
                             {{ element.type.name }}
                         </span>
                     </div>
-                    <h2>
+                    <h3>
                       {{ element.name }}
-                    </h2>
-                    <img class="mt-2" :src="`${this.pathImage}${element.image}`" alt="">
+                    </h3>
+                    <div class="mt-2 shadow rounded-3" style="height: 400px;overflow: hidden;">
+                        <img v-if="(element.image)" class="img-box" :src="`${this.pathImage}${element.image}`" alt="">
+                        <img v-else class="img-box" src="https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg" alt="">
+                        
+                    </div>
                     <div class="text-center mt-2">
                         <p>
                             &#8220;<i>{{ element.short_description }}</i>&#8221;
@@ -167,5 +171,13 @@
 .badge-type {
     color: black !important;
     border: 1px solid black;
- }
+}
+
+.img-box {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 400px;
+    display: block;
+}
 </style>
