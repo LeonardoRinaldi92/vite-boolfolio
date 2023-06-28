@@ -34,11 +34,27 @@
 <template>
     <div class="container">
         <div class="row">
-            <div v-for="(element,index) in store.storedProjects" class="card col-4"> 
-                <h3>
-                  {{ element.name }} => {{ element.type.name }} =><span v-for="(tag,index) in element.tags" >{{ tag.name }}</span>
-                </h3>
-                <img :src="`${this.pathImage}${element.image}`" alt="">
+            <div v-for="(element,index) in store.storedProjects" class="col-4 p-3">
+                <div class="card p-3 text-center">
+                    <div class="text-end">
+                        <span class="badge badge-type">
+                            {{ element.type.name }}
+                        </span>
+                    </div>
+                    <h2>
+                      {{ element.name }}
+                    </h2>
+                    <img class="mt-2" :src="`${this.pathImage}${element.image}`" alt="">
+                    <div class="text-center mt-2">
+                        <p>
+                            &#8220;<i>{{ element.short_description }}</i>&#8221;
+                        </p>
+                    </div>
+                    <div class="text-center mt-1">
+                        <span v-for="(tag, index) in element.tags" :class="tag.slug">
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
         <nav aria-label="Page navigation">
@@ -60,3 +76,96 @@
         </nav>       
     </div>
 </template>
+
+<style lang="scss">
+
+.html {
+    height: 40px;
+    width: 40px;
+    margin-right:5px;
+    &::after {
+        content: "";
+        display: inline-block;
+        background-image: url('https://cdn.pixabay.com/photo/2017/08/05/11/16/logo-2582748_1280.png');
+        background-size: cover;
+        width: 40px; 
+        height: 40px; 
+    }
+}
+
+.css {
+    height: 40px;
+    width: 40px;
+    margin-right:5px;
+    &::after {
+        content: "";
+        display: inline-block;
+        background-image: url('https://www.shareicon.net/data/256x256/2015/09/17/102374_css3_512x512.png');
+        background-size: cover;
+        width: 40px; 
+        height: 40px; 
+    }
+}
+
+.php {
+    height: 40px;
+    width: 40px;
+    margin-right:5px;
+    &::after {
+        content: "";
+        display: inline-block;
+        background-image: url('https://cdn3.iconfinder.com/data/icons/popular-services-brands/512/php-512.png');
+        background-size: cover;
+        width: 40px; 
+        height: 40px; 
+    }
+}
+
+.laravel {
+    height: 40px;
+    width: 40px;
+    margin-right:5px;
+    &::after {
+        content: "";
+        display: inline-block;
+        background-image: url('https://cdn3.iconfinder.com/data/icons/popular-services-brands/512/laravel-512.png');
+        background-size: cover;
+        width: 40px; 
+        height: 40px; 
+    }
+}
+
+
+.js {
+    height: 40px;
+    width: 40px;
+    margin-right:5px;
+    &::after {
+        content: "";
+        display: inline-block;
+        background-image: url('https://uploads-ssl.webflow.com/62038ffc9cd2db4558e3c7b7/6242e5dd4337267623f1e7a5_js.svg');
+        background-size: cover;
+        width: 40px; 
+        height: 40px; 
+    }
+}
+
+.vuevit {
+    height: 40px;
+    width: 40px;
+    margin-right:5px;
+    &::after {
+        content: "";
+        display: inline-block;
+        background-image: url('https://i0.wp.com/www.primefaces.org/wp-content/uploads/2019/08/feature-vuejs.png');
+        background-size: cover;
+        width: 40px; 
+        height: 40px; 
+    }
+}
+
+.badge-type {
+    color: black !important;
+    border: 1px solid black;
+ }
+</style>
