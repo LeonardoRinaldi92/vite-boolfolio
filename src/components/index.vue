@@ -33,7 +33,7 @@
     <div class="container">
         <div class="row">
             <div v-for="(element,index) in store.storedProjects" class="col-4 p-3">
-                <div class="card p-3 text-center" style="min-height:650px">
+                <div class="card p-3 text-center" style="min-height:630px">
                     <router-link :to="{name: 'show', params: { slug: element.slug}}" class="text-decoration-none text-black" @click="store.lastPage = element.slug ">
                         <div class="text-end">
                             <span class="badge badge-type shadow">
