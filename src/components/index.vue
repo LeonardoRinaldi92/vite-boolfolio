@@ -9,7 +9,6 @@
                 store,
                 apiBase: 'http://127.0.0.1:8000/api/projects?',
                 currentpage : 1,
-                pathImage : 'http://127.0.0.1:8000/storage/',
                 maxPage : null,
             }
         },
@@ -45,9 +44,8 @@
                           {{ element.name }}
                         </h3>
                         <div class="mt-2 shadow rounded-3" style="height: 400px;overflow: hidden;">
-                            <img v-if="(element.image)" class="img-box" :src="`${this.pathImage}${element.image}`" alt="">
+                            <img v-if="(element.image)" class="img-box" :src="`${store.pathImage}${element.image}`" alt="">
                             <img v-else class="img-box" src="https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg" alt="">
-                            
                         </div>
                         <div class="text-center mt-2">
                             <p>
@@ -82,7 +80,7 @@
     </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 
 .type-icon {
     height: 40px;
@@ -151,7 +149,7 @@
     object-fit: cover;
     object-position: center;
     width: 100%;
-    height: 400px;
+    height: 100%;
     display: block;
 }
 
