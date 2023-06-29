@@ -22,7 +22,7 @@ export default {
 
 <template>
   <main>
-    <h1>I miei progetti</h1>
+    <h1 class="text-center mt-3">I miei progetti</h1>
     <index/>
   </main>
 

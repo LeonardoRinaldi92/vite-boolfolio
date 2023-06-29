@@ -61,7 +61,7 @@ export default {
       <p class="text-center mt-3">
         <i>''{{ store.storedSingleProject.description }}''</i>
       </p>
-      <div class="w-100 mt-3 rounded-5 overflow-hidden" style="height: 600px">
+      <div class="w-100 mt-3 rounded-5 overflow-hidden" style="height: 700px">
         <img v-if="(store.storedSingleProject.image)" class="w-100 img-box" :src="`${store.pathImage}${store.storedSingleProject.image}`" alt="">
         <img v-else class="img-box" src="https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg" alt="">
       </div>
