@@ -54,9 +54,9 @@
                             &#8220;<i>{{ element.short_description }}</i>&#8221;
                         </p>
                     </div>
-                    <div class="text-center mt-1">
-                        <span v-for="(tag, index) in element.tags" :class="tag.slug">
-                        </span>
+                    <div class="text-center mt-1 row">
+                        <div v-for="(tag, index) in element.tags" class="type-icon col-2" :class="tag.slug">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -81,90 +81,62 @@
     </div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 
-.html {
+.type-icon {
     height: 40px;
     width: 40px;
-    margin-right:5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.type-icon::after {
+    content: "";
+    display: inline-block;
+    width: 40px; 
+    height: 40px; 
+    background-size: cover;
+}
+
+
+
+.html {
     &::after {
-        content: "";
-        display: inline-block;
         background-image: url('https://cdn.pixabay.com/photo/2017/08/05/11/16/logo-2582748_1280.png');
-        background-size: cover;
-        width: 40px; 
-        height: 40px; 
+    }
+    &:hover::after {
+    animation:  y-flip-html 1.5s linear 0s forwards;
     }
 }
 
 .css {
-    height: 40px;
-    width: 40px;
-    margin-right:5px;
     &::after {
-        content: "";
-        display: inline-block;
         background-image: url('https://www.shareicon.net/data/256x256/2015/09/17/102374_css3_512x512.png');
-        background-size: cover;
-        width: 40px; 
-        height: 40px; 
     }
 }
 
 .php {
-    height: 40px;
-    width: 40px;
-    margin-right:5px;
     &::after {
-        content: "";
-        display: inline-block;
         background-image: url('https://cdn3.iconfinder.com/data/icons/popular-services-brands/512/php-512.png');
-        background-size: cover;
-        width: 40px; 
-        height: 40px; 
     }
 }
 
 .laravel {
-    height: 40px;
-    width: 40px;
-    margin-right:5px;
     &::after {
-        content: "";
-        display: inline-block;
         background-image: url('https://cdn3.iconfinder.com/data/icons/popular-services-brands/512/laravel-512.png');
-        background-size: cover;
-        width: 40px; 
-        height: 40px; 
     }
 }
 
 
 .js {
-    height: 40px;
-    width: 40px;
-    margin-right:5px;
     &::after {
-        content: "";
-        display: inline-block;
         background-image: url('https://uploads-ssl.webflow.com/62038ffc9cd2db4558e3c7b7/6242e5dd4337267623f1e7a5_js.svg');
-        background-size: cover;
-        width: 40px; 
-        height: 40px; 
     }
 }
 
 .vuevit {
-    height: 40px;
-    width: 40px;
-    margin-right:5px;
     &::after {
-        content: "";
-        display: inline-block;
         background-image: url('https://i0.wp.com/www.primefaces.org/wp-content/uploads/2019/08/feature-vuejs.png');
-        background-size: cover;
-        width: 40px; 
-        height: 40px; 
     }
 }
 
@@ -179,5 +151,84 @@
     width: 100%;
     height: 400px;
     display: block;
+}
+
+@keyframes y-flip-html {
+    0% {
+        transform: rotateY(0deg);
+    }
+    33% {
+        transform: rotateY(60deg);
+    }
+    66% {
+        transform: rotateY(120deg);
+        border-radius: 50%;
+    }
+    99% {
+        transform: rotateY(179deg);
+        display: inline-block;
+        font-size: 10px;
+        width: 40px; 
+        height: 40px; 
+        content: "⅃MTH";
+        background-image: none;       
+        line-height: 37px;
+        border: 1px solid rgb(228,77,37);
+        border-radius: 50%;             
+
+    }
+    100% {
+        transform: rotateY(180deg);
+        display: inline-block;
+        font-size: 10px;
+        width: 40px; 
+        height: 40px; 
+        content: "⅃MTH";
+        background-image: none;
+        color: rgb(228,77,37);;
+        line-height: 37px;
+        border: 1px solid rgb(228,77,37);
+        border-radius: 50%;
+
+        
+    }
+}
+
+@keyframes y-flip-html-reverse {
+    0% {
+        transform: rotateY(180deg);
+        display: inline-block;
+        font-size: 10px;
+        width: 40px; 
+        height: 40px; 
+        content: "⅃MTH";
+        background-image: none;
+        color: rgb(228, 77, 37);
+        line-height: 37px;
+        border: 1px solid rgb(228, 77, 37);
+        border-radius: 50%;
+    }
+    1% {
+        transform: rotateY(179deg);
+        display: inline-block;
+        font-size: 10px;
+        width: 40px; 
+        height: 40px; 
+        content: "⅃MTH";
+        background-image: none;
+        line-height: 37px;
+        border: 1px solid rgb(228, 77, 37);
+        border-radius: 50%;
+    }
+    34% {
+        transform: rotateY(120deg);
+        border-radius: 50%;
+    }
+    67% {
+        transform: rotateY(60deg);
+    }
+    100% {
+        transform: rotateY(0deg);
+    }
 }
 </style>
