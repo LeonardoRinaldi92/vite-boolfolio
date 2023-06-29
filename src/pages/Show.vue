@@ -21,7 +21,10 @@ export default {
             if (res.data.success) {
                 store.storedSingleProject = res.data.projects;
                 console.log(store.storedSingleProject)
-            } 
+            } else {
+                this.$router.push({ name: 'NotFound'})
+                console.log('cazzo')
+            }
         });
     }
 
