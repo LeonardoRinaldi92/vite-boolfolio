@@ -103,9 +103,7 @@
 .html {
     &::after {
         background-image: url('https://cdn.pixabay.com/photo/2017/08/05/11/16/logo-2582748_1280.png');
-    }
-    &:hover::after {
-    animation:  y-flip-html 1.5s linear 0s forwards;
+        animation:  y-flip-html 6s linear 0s infinite;
     }
 }
 
@@ -157,14 +155,14 @@
     0% {
         transform: rotateY(0deg);
     }
-    33% {
+    12% {
         transform: rotateY(60deg);
     }
-    66% {
+    24% {
         transform: rotateY(120deg);
         border-radius: 50%;
     }
-    99% {
+    34% {
         transform: rotateY(179deg);
         display: inline-block;
         font-size: 10px;
@@ -177,7 +175,7 @@
         border-radius: 50%;             
 
     }
-    100% {
+    40% {
         transform: rotateY(180deg);
         display: inline-block;
         font-size: 10px;
@@ -191,6 +189,26 @@
         border-radius: 50%;
 
         
+    }
+    65% {
+        transform: rotateY(180deg);
+        display: inline-block;
+        font-size: 10px;
+        width: 40px; 
+        height: 40px; 
+        content: "⅃MTH";
+        background-image: none;
+        color: rgb(228,77,37);;
+        line-height: 37px;
+        border: 1px solid rgb(228,77,37);
+        border-radius: 50%;
+    }
+    86% {
+        transform: rotateY(60deg);
+    }
+    100% {
+        transform: rotateY(0deg);
+        border-radius: 50%;
     }
 }
 
