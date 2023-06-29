@@ -22,7 +22,6 @@
             }).then(res=> {
             store.storedProjects = res.data.projects.data
             this.maxPage =res.data.projects.last_page
-
                 })
             }
         },
@@ -36,28 +35,30 @@
         <div class="row">
             <div v-for="(element,index) in store.storedProjects" class="col-4 p-3">
                 <div class="card p-3 text-center" style="min-height:650px">
-                    <div class="text-end">
-                        <span class="badge badge-type shadow">
-                            {{ element.type.name }}
-                        </span>
-                    </div>
-                    <h3>
-                      {{ element.name }}
-                    </h3>
-                    <div class="mt-2 shadow rounded-3" style="height: 400px;overflow: hidden;">
-                        <img v-if="(element.image)" class="img-box" :src="`${this.pathImage}${element.image}`" alt="">
-                        <img v-else class="img-box" src="https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg" alt="">
-                        
-                    </div>
-                    <div class="text-center mt-2">
-                        <p>
-                            &#8220;<i>{{ element.short_description }}</i>&#8221;
-                        </p>
-                    </div>
-                    <div class="text-center mt-1 row">
-                        <div v-for="(tag, index) in element.tags" class="type-icon col-2" :class="tag.slug">
+                    <router-link :to="{name: 'show', params: { slug: element.slug}}" class="text-decoration-none text-black">
+                        <div class="text-end">
+                            <span class="badge badge-type shadow">
+                                {{ element.type.name }}
+                            </span>
                         </div>
-                    </div>
+                        <h3>
+                          {{ element.name }}
+                        </h3>
+                        <div class="mt-2 shadow rounded-3" style="height: 400px;overflow: hidden;">
+                            <img v-if="(element.image)" class="img-box" :src="`${this.pathImage}${element.image}`" alt="">
+                            <img v-else class="img-box" src="https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg" alt="">
+                            
+                        </div>
+                        <div class="text-center mt-2">
+                            <p>
+                                &#8220;<i>{{ element.short_description }}</i>&#8221;
+                            </p>
+                        </div>
+                        <div class="text-center mt-1 row justify-content-center">
+                            <div v-for="(tag, index) in element.tags" class="type-icon col-2" :class="tag.slug">
+                            </div>
+                        </div>
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -87,6 +88,7 @@
     height: 40px;
     width: 40px;
     margin-bottom: 5px;
+    margin-right: 10px;
     cursor: pointer;
 }
 

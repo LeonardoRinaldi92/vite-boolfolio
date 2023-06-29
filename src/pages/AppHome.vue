@@ -1,6 +1,8 @@
 <script >
 
-import {store} from './store';
+import index from '../components/index.vue';
+
+import {store} from '../store';
 
 // backtick : `
 
@@ -11,17 +13,20 @@ export default {
       store
     }
   },
+  components: {
+    index
+  }
 }
 
 </script>
 
 <template>
   <main>
-    <router-view></router-view>
+    <h1>I miei progetti</h1>
+    <index/>
   </main>
 
 </template>
 
 <style lang="scss">
-@use './style/main.scss';
 </style>
