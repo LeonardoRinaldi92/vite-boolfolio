@@ -30,7 +30,7 @@
     }
 </script>
 <template>
-    <div class="container">
+    <div class="container pb-3">
         <div class="row">
             <div v-for="(element,index) in store.storedProjects" class="col-4 p-3">
                 <div class="card p-3 text-center" style="min-height:630px">

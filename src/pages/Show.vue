@@ -49,14 +49,14 @@ export default {
         </div>
         <div class="col-4">
           <div class="row justify-content-end w-100">
-            <span class="badge badge-type w-25">
+            <span class="badge badge-type w-25 mt-4">
               {{ store.storedSingleProject.type.name }}
             </span>
           </div>
           <h1 class="text-center">
             {{ store.storedSingleProject.name }}
           </h1>
-          <div class="row justify-content-end text-center mt-4">
+          <div class="row justify-content-center text-center mt-4">
             <div v-for="(tag, index) in store.storedSingleProject.tags" class="type-icon col-2" :class="tag.slug"> </div>
           </div>
           <h5 class="text-center mt-4">
