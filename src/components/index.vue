@@ -8,24 +8,29 @@
             return {
                 store,
                 apiBase: 'http://127.0.0.1:8000/api/',
-                currentpage : 1,
+                
                 maxPage : null,
             }
         },
         methods: {
             getProjects(chosenPag){
-            axios.get(`${this.apiBase}projects?`, {
-                params: {
-                    page: chosenPag
-                }
-            }).then(res=> {
+
+            let params = { 
+                page: chosenPag
+            }
+
+            if (store.storedTypesSelected !== 'all' ) {
+                params.type_id = store.storedTypesSelected
+            }
+
+            axios.get(`${this.apiBase}projects`, {params}).then(res=> {
             store.storedProjects = res.data.projects.data
             this.maxPage =res.data.projects.last_page
                 })
             },
 
             getTypes() {
-                if(store.storedTypes !== null) {
+                if(store.storedTypes == null) {
                     axios.get(`${this.apiBase}types`).then(res=>{
                         store.storedTypes = res.data.types
                     })
@@ -33,7 +38,7 @@
             }
         },
         mounted() {
-            this.getProjects(this.currentpage)
+            this.getProjects(store.currentpage)
             this.getTypes()
         }
     }
@@ -42,8 +47,8 @@
     <div class="w-25 m-auto mt3">
         <div class="mb-3">
             <label for="select-types">Scegli quali tipi di progetto visualizzare</label>
-            <select v-model="store.storedTypesSelected" class="form-select form-select-lg" name="select-types" id="select-types">
-                <option value="0" selected >Tutti</option>
+            <select v-model="store.storedTypesSelected" @change="store.currentpage = 1,getProjects(store.currentpage)" class="form-select form-select-lg" name="select-types" id="select-types">
+                <option value="all" selected >Tutti</option>
                 <option v-for="(type, index) in store.storedTypes" :key="index" :value="type.id">{{ type.name }}</option>
             </select>
         </div>
@@ -80,16 +85,16 @@
         </div>
         <nav aria-label="Page navigation">
           <ul class="pagination    ">
-            <li class="page-item" :class="(this.currentpage === 1) ? 'disabled' : ''">
-              <a class="page-link"  @click.prevent="currentpage --, getProjects(currentpage)" href="#" aria-label="Previous">
+            <li class="page-item" :class="(this.store.currentpage === 1) ? 'disabled' : ''">
+              <a class="page-link"  @click.prevent="store.currentpage --, getProjects(store.currentpage)" href="#" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
               </a>
             </li>
-            <li class="page-item" :class="(this.currentpage === pages) ? 'active' : ''" aria-current="page" v-for="(pages,index) in this.maxPage ">
-                <a class="page-link" @click.prevent="currentpage = pages,getProjects(currentpage)" href="#" :style="(currentpage === pages) ? 'pointer-events: none; cursor: default;' : ''" >{{ pages }}</a>
+            <li class="page-item" :class="(this.store.currentpage === pages) ? 'active' : ''" aria-current="page" v-for="(pages,index) in this.maxPage ">
+                <a class="page-link" @click.prevent="store.currentpage = pages,getProjects(store.currentpage)" href="#" :style="(store.currentpage === pages) ? 'pointer-events: none; cursor: default;' : ''" >{{ pages }}</a>
             </li>
-            <li class="page-item" :class="(this.currentpage === this.maxPage) ? 'disabled' : ''" >
-              <a class="page-link" @click.prevent="currentpage ++, getProjects(currentpage)" href="#" aria-label="Next">
+            <li class="page-item" :class="(this.store.currentpage === this.maxPage) ? 'disabled' : ''" >
+              <a class="page-link" @click.prevent="store.currentpage ++, getProjects(store.currentpage)" href="#" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
               </a>
             </li>

@@ -7,6 +7,7 @@ export const store = reactive(
         pathImage : 'http://127.0.0.1:8000/storage/',
         lastPage : null,
         storedTypes : null,
-        storedTypesSelected : 0
+        storedTypesSelected : 'all',
+        currentpage : 1  
     }
 )
