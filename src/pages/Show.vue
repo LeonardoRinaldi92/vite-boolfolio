@@ -53,7 +53,7 @@ export default {
               {{ store.storedSingleProject.type.name }}
             </span>
           </div>
-          <h1 class="text-center">
+          <h1 class="text-center text-capitalize">
             {{ store.storedSingleProject.name }}
           </h1>
           <div class="row justify-content-center text-center mt-4">

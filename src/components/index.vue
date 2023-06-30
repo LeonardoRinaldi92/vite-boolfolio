@@ -84,7 +84,7 @@
                         </span>
                     </div>
                     <router-link :to="{name: 'show', params: { slug: element.slug}}" class="text-decoration-none text-black" @click="store.lastPage = element.slug ">
-                        <h3>
+                        <h3 class="text-capitalize">
                           {{ element.name }}
                         </h3>
                         <div class="mt-2 shadow rounded-3" style="height: 400px;overflow: hidden;">
@@ -340,7 +340,7 @@
         font-size: 10px;
         width: 40px; 
         height: 40px; 
-        content: "ƧƧƆ";
+        content: "ƨႱ";
         background-image: none;       
         line-height: 37px;
         border: 1px solid rgb(247,223,28);
@@ -355,7 +355,7 @@
         font-size: 10px;
         width: 40px; 
         height: 40px; 
-        content: "ƧƧƆ";
+        content: "ƨႱ";
         background-image: none;
         color: rgb(247,223,28);
         line-height: 37px;
@@ -373,7 +373,7 @@
         font-size: 10px;
         width: 40px; 
         height: 40px; 
-        content: "ƧƧƆ";
+        content: "ƨႱ";
         background-image: none;
         color:rgb(247,223,28);
         line-height: 37px;
