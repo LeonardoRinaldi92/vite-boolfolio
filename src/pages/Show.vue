@@ -39,15 +39,15 @@ export default {
 
 <template>
   <main>
-    <div v-if="(store.lastPage === this.rightpage)" class="container mt-2">
-      <div class="row">
+    <div v-if="(store.lastPage === this.rightpage)" class="p-5">
+      <div class="row position-relative">
         <div class="col-8">
-          <div class="w-100 mt-3 rounded-5 overflow-hidden" style="height: 95vh">
+          <div class="w-100 mt-3 rounded-5 overflow-hidden" style="border: 1px solid rgba(0, 0, 0, 0.137);">
             <img v-if="(store.storedSingleProject.image)" class="w-100 img-box" :src="`${store.pathImage}${store.storedSingleProject.image}`" alt="">
             <img v-else class="img-box" src="https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg" alt="">
           </div>
         </div>
-        <div class="col-4">
+        <div class="col-4 desc-box">
           <div class="row justify-content-end w-100">
             <span class="badge badge-type w-25 mt-4">
               {{ store.storedSingleProject.type.name }}
@@ -65,14 +65,42 @@ export default {
           <p class="text-center mt-3">
             <i>''{{ store.storedSingleProject.description }}''</i>
           </p>
+          <div>
+            <div>
+              <div class="text-center">
+                <div class="logo-box">
+                  <img class="h-100" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="">
+                </div>
+                <span style="vertical-align:70%">
+                  <a class=" text-decoration-none text-bg-dark ms-2" href="https://github.com/LeonardoRinaldi92/htmlcss-discord" target="_blank"><b>Vai alla repo su GitHub</b></a>
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </main>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
   main {
-    height: 98vh;
+    height: 100vh;
   }
+
+  .desc-box {
+    position: fixed;
+    top: 40px;
+    right: 10px;
+  }
+
+  .logo-box {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: inline-block;
+
+  }
+
 </style>

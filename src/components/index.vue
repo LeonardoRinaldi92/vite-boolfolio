@@ -130,7 +130,6 @@
     height: 40px;
     width: 40px;
     margin-bottom: 5px;
-    cursor: pointer;
 }
 
 .type-icon::after {
@@ -195,7 +194,7 @@
 
 .img-box {
     object-fit: cover;
-    object-position: center;
+    object-position: top;
     width: 100%;
     height: 100%;
     display: block;
@@ -608,6 +607,11 @@
 
 .box-tooltip:hover .tooltipo {
     display: block;
+}
+
+.box-tooltip:hover {
+    background-color: rgb(112, 112, 112);
+    color: white!important;
 }
 
 
