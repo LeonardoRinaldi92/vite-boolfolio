@@ -25,10 +25,11 @@
             },
 
             getTypes() {
-                axios.get(`${this.apiBase}types`).then(res=>{
-                    store.storedTypes = res.data.types
-                })
-
+                if(store.storedTypes !== null) {
+                    axios.get(`${this.apiBase}types`).then(res=>{
+                        store.storedTypes = res.data.types
+                    })
+                }
             }
         },
         mounted() {
