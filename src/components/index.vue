@@ -35,7 +35,16 @@
                         store.storedTypes = res.data.types
                     })
                 }
-            }
+            },
+
+            GoTop() {
+                window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+                });
+            },
+
+            
         },
         mounted() {
             this.getProjects(store.currentpage)
@@ -47,22 +56,34 @@
     <div class="w-25 m-auto mt3">
         <div class="mb-3">
             <label for="select-types">Scegli quali tipi di progetto visualizzare</label>
-            <select v-model="store.storedTypesSelected" @change="store.currentpage = 1,getProjects(store.currentpage)" class="form-select form-select-lg" name="select-types" id="select-types">
-                <option value="all" selected >Tutti</option>
-                <option v-for="(type, index) in store.storedTypes" :key="index" :value="type.id">{{ type.name }}</option>
-            </select>
+            <div class="row">
+                <div class="col-9">
+                    <select v-model="store.storedTypesSelected" @change="store.currentpage = 1,getProjects(store.currentpage)" class="form-select form-select-lg" name="select-types" id="select-types">
+                        <option value="all" selected >Tutti</option>
+                        <option v-for="(type, index) in store.storedTypes" :key="index" :value="type.id">{{ type.name }}</option>
+                    </select>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-primary h-100" :class="(store.storedTypesSelected !== 'all' || store.currentpage !== 1)? '' : 'd-none'" @click="store.storedTypesSelected='all',store.currentpage = 1,getProjects(store.currentpage)">
+                        reset
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
     <div class="container pb-3">
         <div class="row">
             <div v-for="(element,index) in store.storedProjects" class="col-4 p-3">
                 <div class="card p-3 text-center" style="min-height:630px">
-                    <router-link :to="{name: 'show', params: { slug: element.slug}}" class="text-decoration-none text-black" @click="store.lastPage = element.slug ">
-                        <div class="text-end">
-                            <span class="badge badge-type shadow">
-                                {{ element.type.name }}
+                    <div class="text-end " @click="store.storedTypesSelected = element.type_id, store.currentpage = 1, getProjects(store.currentpage)">
+                        <span class="badge badge-type shadow box-tooltip">
+                            <span class="tooltipo">
+                                visualizza tutti i progetti {{ element.type.name }}
                             </span>
-                        </div>
+                            {{ element.type.name }}
+                        </span>
+                    </div>
+                    <router-link :to="{name: 'show', params: { slug: element.slug}}" class="text-decoration-none text-black" @click="store.lastPage = element.slug ">
                         <h3>
                           {{ element.name }}
                         </h3>
@@ -86,15 +107,15 @@
         <nav aria-label="Page navigation">
           <ul class="pagination    ">
             <li class="page-item" :class="(this.store.currentpage === 1) ? 'disabled' : ''">
-              <a class="page-link"  @click.prevent="store.currentpage --, getProjects(store.currentpage)" href="#" aria-label="Previous">
+              <a class="page-link"  @click.prevent="store.currentpage --, getProjects(store.currentpage), GoTop()" href="#" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
               </a>
             </li>
             <li class="page-item" :class="(this.store.currentpage === pages) ? 'active' : ''" aria-current="page" v-for="(pages,index) in this.maxPage ">
-                <a class="page-link" @click.prevent="store.currentpage = pages,getProjects(store.currentpage)" href="#" :style="(store.currentpage === pages) ? 'pointer-events: none; cursor: default;' : ''" >{{ pages }}</a>
+                <a class="page-link" @click.prevent="store.currentpage = pages,getProjects(store.currentpage), GoTop()" href="#" :style="(store.currentpage === pages) ? 'pointer-events: none; cursor: default;' : ''" >{{ pages }}</a>
             </li>
             <li class="page-item" :class="(this.store.currentpage === this.maxPage) ? 'disabled' : ''" >
-              <a class="page-link" @click.prevent="store.currentpage ++, getProjects(store.currentpage)" href="#" aria-label="Next">
+              <a class="page-link" @click.prevent="store.currentpage ++, getProjects(store.currentpage), GoTop()" href="#" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
               </a>
             </li>
@@ -169,6 +190,7 @@
 .badge-type {
     color: black !important;
     border: 1px solid black;
+    cursor: pointer;
 }
 
 .img-box {
@@ -566,4 +588,27 @@
         font-size: 8.5px;
     }
 }
+
+.box-tooltip {
+    position: relative;
+}
+
+.tooltipo {
+    position: absolute;
+    top: -25px;
+    right: 0px;
+    z-index: 5;
+    background-color: black;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    display: none;
+    padding: 5px;
+}
+
+.box-tooltip:hover .tooltipo {
+    display: block;
+}
+
+
 </style>
