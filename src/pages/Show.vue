@@ -42,7 +42,7 @@ export default {
     <div v-if="(store.lastPage === this.rightpage)" class="container mt-2">
       <div class="row">
         <div class="col-8">
-          <div class="w-100 mt-3 rounded-5 overflow-hidden" style="height: 650px">
+          <div class="w-100 mt-3 rounded-5 overflow-hidden" style="height: 95vh">
             <img v-if="(store.storedSingleProject.image)" class="w-100 img-box" :src="`${store.pathImage}${store.storedSingleProject.image}`" alt="">
             <img v-else class="img-box" src="https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg" alt="">
           </div>

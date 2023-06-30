@@ -7,14 +7,14 @@
         data() {
             return {
                 store,
-                apiBase: 'http://127.0.0.1:8000/api/projects?',
+                apiBase: 'http://127.0.0.1:8000/api/',
                 currentpage : 1,
                 maxPage : null,
             }
         },
         methods: {
             getProjects(chosenPag){
-            axios.get(`${this.apiBase}`, {
+            axios.get(`${this.apiBase}projects?`, {
                 params: {
                     page: chosenPag
                 }
@@ -22,14 +22,31 @@
             store.storedProjects = res.data.projects.data
             this.maxPage =res.data.projects.last_page
                 })
+            },
+
+            getTypes() {
+                axios.get(`${this.apiBase}types`).then(res=>{
+                    store.storedTypes = res.data.types
+                })
+
             }
         },
         mounted() {
             this.getProjects(this.currentpage)
+            this.getTypes()
         }
     }
 </script>
 <template>
+    <div class="w-25 m-auto mt3">
+        <div class="mb-3">
+            <label for="select-types">Scegli quali tipi di progetto visualizzare</label>
+            <select v-model="store.storedTypesSelected" class="form-select form-select-lg" name="select-types" id="select-types">
+                <option value="0" selected >Tutti</option>
+                <option v-for="(type, index) in store.storedTypes" :key="index" :value="type.id">{{ type.name }}</option>
+            </select>
+        </div>
+    </div>
     <div class="container pb-3">
         <div class="row">
             <div v-for="(element,index) in store.storedProjects" class="col-4 p-3">
