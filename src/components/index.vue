@@ -39,6 +39,15 @@
                 }
             },
 
+            getTags() {
+                if(store.storedTags == null) {
+                    axios.get(`${this.apiBase}tags`).then(res=>{
+                        store.storedTags = res.data.tags
+                    })
+                }
+
+            },
+
             GoTop() {
                 window.scrollTo({
                 top: 0,
@@ -51,19 +60,28 @@
         mounted() {
             this.getProjects(store.currentpage)
             this.getTypes()
+            this.getTags()
         }
     }
 </script>
 <template>
-    <div class="w-25 m-auto mt3">
-        <div class="mb-3">
-            <label for="select-types">Scegli quali tipi di progetto visualizzare</label>
-            <div class="row">
-                <div class="col-9">
+    <div class="w-50 m-auto mt3">
+        <div class="mb-3 ">
+            <label for="select-types" >Scegli quali tipi di progetto visualizzare</label>
+            <div class="row justify-content-center align-items-center">
+                <div class="col-3 mt-3">
                     <select v-model="store.storedTypesSelected" @change="store.currentpage = 1,getProjects(store.currentpage)" class="form-select form-select-lg" name="select-types" id="select-types">
                         <option value="all" selected >Tutti</option>
                         <option v-for="(type, index) in store.storedTypes" :key="index" :value="type.id">{{ type.name }}</option>
                     </select>
+                </div>
+                <div class="col-9">
+                    <label v-for="(tag, index) in store.storedTags" :key="index" for="" class="mt-3 ms-2">
+                        <input type="checkbox" :value="tag.id" v-model="store.storedTagsSelected">
+                        <span class="text-uppercase ms-2">
+                            {{ tag.name }}
+                        </span>
+                    </label>
                 </div>
                 <div class="col-3">
                     <button class="btn btn-primary h-100" :class="(store.storedTypesSelected !== 'all' || store.currentpage !== 1)? '' : 'd-none'" @click="store.storedTypesSelected='all',store.currentpage = 1,getProjects(store.currentpage)">
