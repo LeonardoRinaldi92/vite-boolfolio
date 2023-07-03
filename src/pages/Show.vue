@@ -1,6 +1,7 @@
 <script >
 
 import {store} from '../store';
+import navBar from  '../components/navBar.vue';
 
 import axios from 'axios';
 
@@ -16,8 +17,15 @@ export default {
       
     }
   },
+  components: {
+    navBar
+
+  },
   methods: {
     getSingleProject() {
+
+      store.viewedPage = 'card'
+
         axios.get(`${this.apiBase}${this.$route.params.slug}`).then(res => {
             if (res.data.success) {
                 store.storedSingleProject = res.data.projects;
@@ -30,6 +38,8 @@ export default {
         });
     }
 
+    
+
   },
     created() {
     this.getSingleProject()
@@ -39,7 +49,9 @@ export default {
 </script>
 
 <template>
-  <main>
+  
+  <main class="position-relative">
+    <navBar/>
     <div v-if="(store.lastPage === this.rightpage)" class="p-5">
       <div class="row position-relative">
         <div class="col-8">

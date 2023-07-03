@@ -15,6 +15,8 @@
         methods: {
             getProjects(chosenPag){
 
+            store.viewedPage = 'home'
+
             let params = { 
                 page: chosenPag
             }
@@ -71,6 +73,7 @@
             </div>
         </div>
     </div>
+    
     <div class="container pb-3">
         <div class="row">
             <div v-for="(element,index) in store.storedProjects" class="col-4 p-3">
@@ -83,7 +86,7 @@
                             {{ element.type.name }}
                         </span>
                     </div>
-                    <router-link :to="{name: 'show', params: { slug: element.slug}}" class="text-decoration-none text-black" @click="store.lastPage = element.slug ">
+                    <router-link :to="{name: 'show', params: { slug: element.slug}}" class="text-decoration-none text-black" @click="store.lastPage = element.slug, store.viewedPage = 'card'">
                         <h3 class="text-capitalize">
                           {{ element.name }}
                         </h3>

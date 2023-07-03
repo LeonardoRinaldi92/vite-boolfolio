@@ -8,6 +8,7 @@ export const store = reactive(
         lastPage : null,
         storedTypes : null,
         storedTypesSelected : 'all',
-        currentpage : 1  
+        currentpage : 1  ,
+        viewedPage : 'home'
     }
 )
