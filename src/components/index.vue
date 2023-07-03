@@ -17,6 +17,8 @@
 
             store.viewedPage = 'home'
 
+            
+
             let params = { 
                 page: chosenPag
             }
@@ -25,6 +27,12 @@
                 params.type_id = store.storedTypesSelected
             }
 
+            if(store.storedTagsSelected.length > 0){
+                params.tags_ids = store.storedTagsSelected.join(',')
+            }
+
+            console.log(params)
+            
             axios.get(`${this.apiBase}projects`, {params}).then(res=> {
             store.storedProjects = res.data.projects.data
             this.maxPage =res.data.projects.last_page
@@ -61,7 +69,13 @@
             this.getProjects(store.currentpage)
             this.getTypes()
             this.getTags()
-        }
+        },
+        watch: {
+        'store.storedTagsSelected': {
+        handler: 'getProjects',
+        deep: true
+    }
+},
     }
 </script>
 <template>
