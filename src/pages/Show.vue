@@ -22,6 +22,7 @@ export default {
             if (res.data.success) {
                 store.storedSingleProject = res.data.projects;
                 this.rightpage = res.data.projects.slug
+                store.lastPage = this.rightpage
 
             } else {
                 this.$router.push({ name: 'NotFound'})
